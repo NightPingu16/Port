@@ -86,13 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const content = entry.target.querySelector(".content")
         content.classList.add("show")
 
-        // Check if we're scrolling up or down
-        if (document.body.classList.contains("scrolling-up")) {
-          content.classList.add("reverse-animate")
-        } else {
-          content.classList.remove("reverse-animate")
-        }
-
         // Update active navigation link
         const id = entry.target.getAttribute("id")
         navItems.forEach((item) => {
@@ -109,8 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
           // Auto-play videos when in view
           const videos = entry.target.querySelectorAll("video")
           videos.forEach((video) => {
-            if (video.paused) {
-              video.play().catch((e) => console.log("Auto-play prevented:", e))
+            // Only try to play videos on desktop
+            if (window.innerWidth > 768) {
+              if (video.paused) {
+                video.play().catch((e) => console.log("Auto-play prevented:", e))
+              }
             }
           })
         }
@@ -179,10 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           videoModal.classList.add("show")
           projectVideo.load()
-          projectVideo.play().catch((e) => console.log("Autoplay prevented:", e))
 
           // Add controls to the video
           projectVideo.setAttribute("controls", "true")
+
+          // Play video after a short delay to avoid stuttering
+          setTimeout(() => {
+            projectVideo.play().catch((e) => console.log("Autoplay prevented:", e))
+          }, 300)
         }, 10)
       }
     })
@@ -326,7 +326,9 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   function handleTilt(e) {
-    
+    // Only apply tilt effect on desktop
+    if (window.innerWidth <= 768) return
+
     const cardRect = this.getBoundingClientRect()
     const cardCenterX = cardRect.left + cardRect.width / 2
     const cardCenterY = cardRect.top + cardRect.height / 2
@@ -335,8 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const mouseY = e.clientY - cardCenterY
 
     // Calculate rotation based on mouse position
-    const rotateY = mouseX * 0.05 
-    const rotateX = -mouseY * 0.05 
+    const rotateY = mouseX * 0.05
+    const rotateX = -mouseY * 0.05
 
     // Transform
     this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
@@ -353,15 +355,29 @@ document.addEventListener("DOMContentLoaded", () => {
     this.style.transition = "transform 0.5s ease, background 0.5s ease"
     this.style.background = "rgba(30, 30, 30, 0.8)"
   }
+
+  // Check if device is mobile
+  const isMobile = window.innerWidth <= 768
+
+  // Preload videos for better mobile performance
+  if (isMobile) {
+    const videoElements = document.querySelectorAll("video")
+    videoElements.forEach((video) => {
+      video.setAttribute("preload", "metadata")
+      video.setAttribute("playsinline", "true")
+    })
+  }
 })
 
 // Interactive Background Particles
 function createParticles() {
+  // Reduce particle count on mobile for better performance
+  const isMobile = window.innerWidth <= 768
+  const particleCount = isMobile ? 20 : 50
+
   const particlesContainer = document.createElement("div")
   particlesContainer.className = "particles"
   document.body.appendChild(particlesContainer)
-
-  const particleCount = 50
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement("div")
@@ -377,35 +393,40 @@ function createParticles() {
 
     particlesContainer.appendChild(particle)
 
-    // Animate Particles
-    setInterval(() => {
-      particle.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`
-      particle.style.opacity = Math.random() * 0.5
-    }, 2000)
+    // Animate Particles - less frequent on mobile
+    setInterval(
+      () => {
+        particle.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`
+        particle.style.opacity = Math.random() * 0.5
+      },
+      isMobile ? 3000 : 2000,
+    )
   }
 
-  // Mouse Interaction
-  document.addEventListener("mousemove", (e) => {
-    const mouseX = e.clientX
-    const mouseY = e.clientY
+  // Mouse Interaction - only on desktop
+  if (!isMobile) {
+    document.addEventListener("mousemove", (e) => {
+      const mouseX = e.clientX
+      const mouseY = e.clientY
 
-    const particles = document.querySelectorAll(".particles div")
-    particles.forEach((particle) => {
-      const rect = particle.getBoundingClientRect()
-      const particleX = rect.left + rect.width / 2
-      const particleY = rect.top + rect.height / 2
+      const particles = document.querySelectorAll(".particles div")
+      particles.forEach((particle) => {
+        const rect = particle.getBoundingClientRect()
+        const particleX = rect.left + rect.width / 2
+        const particleY = rect.top + rect.height / 2
 
-      const distX = mouseX - particleX
-      const distY = mouseY - particleY
-      const distance = Math.sqrt(distX * distX + distY * distY)
+        const distX = mouseX - particleX
+        const distY = mouseY - particleY
+        const distance = Math.sqrt(distX * distX + distY * distY)
 
-      if (distance < 100) {
-        const moveX = distX / 10
-        const moveY = distY / 10
-        particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`
-        particle.style.opacity = "0.8"
-      }
+        if (distance < 100) {
+          const moveX = distX / 10
+          const moveY = distY / 10
+          particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`
+          particle.style.opacity = "0.8"
+        }
+      })
     })
-  })
+  }
 }
 
