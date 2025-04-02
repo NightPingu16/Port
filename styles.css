@@ -143,7 +143,6 @@ nav {
   transition: var(--transition);
 }
 
-
 .section {
   min-height: 100vh;
   padding: 80px 5%;
@@ -168,21 +167,7 @@ nav {
   transform: translateX(0);
 }
 
-
-.content.show.reverse-animate {
-  animation: slide-in-right 0.6s ease forwards;
-}
-
-@keyframes slide-in-right {
-  0% {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* Removed reverse-animate class and animation */
 
 .section-title {
   font-size: 2.5rem;
@@ -203,7 +188,6 @@ nav {
   height: 4px;
   background: var(--primary-color);
 }
-
 
 #home {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -287,7 +271,6 @@ nav {
   margin-bottom: 1rem;
 }
 
-
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -352,7 +335,7 @@ nav {
   gap: 2rem;
   max-width: 800px;
   margin: 0 auto;
-  perspective: 1000px; 
+  perspective: 1000px;
 }
 
 .education-card {
@@ -554,7 +537,6 @@ nav {
   animation: float-in 0.8s ease forwards, pulse-glow 3s infinite;
 }
 
-
 .experience-timeline {
   position: relative;
   max-width: 800px;
@@ -697,7 +679,6 @@ nav {
   right: 0;
 }
 
-
 #projects {
   position: relative;
 }
@@ -795,7 +776,7 @@ nav {
 .video-container {
   position: relative;
   width: 100%;
-  padding-top: 177.77%; 
+  padding-top: 177.77%;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -878,7 +859,6 @@ nav {
   background: var(--primary-color);
   transform: translateY(-3px);
 }
-
 
 .testimonials-container {
   max-width: 900px;
@@ -1010,7 +990,6 @@ nav {
   transform: scale(1.2);
 }
 
-
 .video-modal {
   display: none;
   position: fixed;
@@ -1061,7 +1040,7 @@ nav {
   position: relative;
   width: 100%;
   height: 0;
-  padding-top: 56.25%; 
+  padding-top: 56.25%;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -1083,7 +1062,6 @@ nav {
   margin-top: 1rem;
   font-size: 1.5rem;
 }
-
 
 .contact-container {
   display: grid;
@@ -1122,8 +1100,6 @@ nav {
   height: 40px;
   background: var(--primary-color);
   color: white;
-  border-radius: 50%;
-  transition: var(--transition);
 }
 
 .social-link:hover {
@@ -1174,14 +1150,12 @@ nav {
   text-decoration: underline;
 }
 
-
 footer {
   background: rgba(18, 18, 18, 0.95);
   color: white;
   text-align: center;
   padding: 2rem;
 }
-
 
 @media (max-width: 992px) {
   .section-title {
@@ -1247,6 +1221,7 @@ footer {
     transition: transform 0.5s ease-in;
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
     padding: 2rem 0;
+    z-index: 1000;
   }
 
   .nav-links li {
@@ -1288,6 +1263,29 @@ footer {
   .education-card {
     padding: 1.5rem;
   }
+
+  /* Improved mobile styling for video containers */
+  .video-container {
+    padding-top: 100%; /* Make videos square on mobile for better viewing */
+  }
+
+  /* Enhance mobile video modal */
+  .modal-content .video-container {
+    padding-top: 100%;
+  }
+
+  .modal-content .video-container video {
+    object-fit: cover;
+  }
+
+  /* Improve mobile navigation */
+  #home h1 {
+    font-size: 2.5rem;
+  }
+
+  #home h2 {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1302,6 +1300,33 @@ footer {
 
   .brand-name {
     font-size: 1.8rem;
+  }
+
+  /* Enhanced mobile styling */
+  .section {
+    padding: 50px 4%;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .video-container {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .testimonial-content {
+    padding: 1.5rem;
+  }
+
+  .testimonial-text p {
+    font-size: 1rem;
+  }
+
+  /* Improve mobile video display */
+  .preview-video {
+    object-fit: contain;
+    background-color: #000;
   }
 }
 
@@ -1327,7 +1352,6 @@ footer {
 .toggle .line3 {
   transform: rotate(45deg) translate(-5px, -6px);
 }
-
 
 .particles {
   position: fixed;
@@ -1357,7 +1381,6 @@ footer {
   line-height: 1.6;
 }
 
-
 .project-section.in-view .project-intro {
   animation: slide-in-left 0.8s ease forwards;
 }
@@ -1381,10 +1404,8 @@ footer {
   }
 }
 
-.scrolling-up .content.show {
-  animation: slide-in-right 0.6s ease forwards;
-}
-
-.scrolling-down .content.show {
+/* Simplified animation - only one fade in from left */
+.content.show {
   animation: slide-in-left 0.6s ease forwards;
 }
+
