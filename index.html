@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>UC - Video Editor & Motion Designer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body class="dark-theme">
+  
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+   
+    <div class="loading-screen">
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <circle id="loader-circle" cx="40" cy="40" r="32"></circle>
+            </svg>
+            <div class="loading-text">UC</div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-container">
             <div class="logo">UC</div>
@@ -17,6 +32,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
+                <li><a href="#work-experience">Work Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -32,9 +48,14 @@
     <main>
         <section id="home" class="section">
             <div class="content">
-                <h1>Hello, I'm <span class="highlight">Utkarsh Chawla</span></h1>
-                <h2>Video Editor/Motion Designer</h2>
-                <a href="#about" class="scroll-btn">
+                <div class="home-bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+                <h1 data-aos="fade-up" data-aos-delay="300">Hello, I'm <span class="highlight">Utkarsh Chawla</span></h1>
+                <h2 data-aos="fade-up" data-aos-delay="500"><span class="typewriter-container"><span class="typewriter-text"></span></span></h2>
+                <a href="#about" class="scroll-btn" data-aos="fade-up" data-aos-delay="700">
                     <span>Scroll Down</span>
                     <i class="fas fa-chevron-down"></i>
                 </a>
@@ -43,14 +64,14 @@
 
         <section id="about" class="section">
             <div class="content">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
+                <h2 class="section-title" data-aos="fade-up">About Me</h2>
+                <div class="about-content" data-aos="fade-up" data-aos-delay="200">
                     <div class="about-img">
                         <img src="img/uc.jpg" alt="Profile Image" class="profile-image">
+                        <div class="img-overlay"></div>
                     </div>
                     <div class="about-text">
-                        <p>Hey there! I'm UC, a creative video editor and designer with a knack for storytelling. I specialize in crafting high-impact visuals that engage and inspire, using tools like After Effects, Premiere Pro, and Photoshop. Whether it's for brands or creators, I turn ideas into compelling content that stands out.</p>
-                        <p>Over the course of my career, I've worked with various brands, bringing their ideas to life through engaging and compelling content. From eye-catching ads to dynamic social media videos, I've helped businesses connect with their audience in a way that feels fresh, impactful, and unforgettable.</p>
+                        <p style="font-size: 1.2rem; line-height: 1.8;">Hey there! I'm Utkarsh Chawla, a creative video editor and designer with a knack for storytelling. I specialize in crafting high-impact visuals that engage and inspire, using tools like After Effects, Premiere Pro, and Photoshop. Whether it's for brands or creators, I turn ideas into compelling content that stands out.</p>
                     </div>
                 </div>
             </div>
@@ -58,9 +79,9 @@
 
         <section id="skills" class="section">
             <div class="content">
-                <h2 class="section-title">Skills</h2>
+                <h2 class="section-title" data-aos="fade-up">Skills</h2>
                 <div class="skills-container">
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
                         <h3>Video Editing</h3>
                         <div class="skill-icons">
                             <div class="skill-icon-item">
@@ -89,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
                         <h3>Graphic Design</h3>
                         <div class="skill-icons">
                             <div class="skill-icon-item">
@@ -118,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
                         <h3>Audio</h3>
                         <div class="skill-icons">
                             <div class="skill-icon-item">
@@ -153,8 +174,8 @@
         
         <section id="education" class="section">
             <div class="content">
-                <h2 class="section-title">Education</h2>
-                <div class="education-cards">
+                <h2 class="section-title" data-aos="fade-up">Education</h2>
+                <div class="education-cards" data-aos="fade-up" data-aos-delay="200">
                     <div class="education-card">
                         <div class="education-icon">
                             <i class="fas fa-graduation-cap"></i>
@@ -178,9 +199,9 @@
 
         <section id="experience" class="section">
             <div class="content">
-                <h2 class="section-title">Experience</h2>
+                <h2 class="section-title" data-aos="fade-up">Experience</h2>
                 <div class="experience-timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">2024 - Present</div>
@@ -194,7 +215,7 @@
                         </div>
                     </div>
                     
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">2018 - 2020</div>
@@ -211,11 +232,26 @@
             </div>
         </section>
 
+        <section id="work-experience" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+                <div class="about-content" style="flex-direction: row-reverse;" data-aos="fade-up" data-aos-delay="200">
+                    <div class="about-img">
+                        <img src="img/uc.jpg" alt="Work Experience Image" class="profile-image">
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="about-text">
+                        <p style="font-size: 1.2rem; line-height: 1.8;">Over the course of my career, I've worked with various brands, bringing their ideas to life through engaging and compelling content. From eye-catching ads to dynamic social media videos, I've helped businesses connect with their audience in a way that feels fresh, impactful, and unforgettable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div id="projects">
             <section id="project1" class="project-section section">
                 <div class="content">
-                    <h2 class="section-title">Projects</h2>
-                    <div class="project-showcase">
+                    <h2 class="section-title" data-aos="fade-up">Projects</h2>
+                    <div class="project-showcase" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-intro">
                             <div class="brand-logo-container">
                                 <img src="img/logos/Logomark_Blue_1.png" alt="FES Logo" class="brand-logo-img">
@@ -268,7 +304,7 @@
 
             <section id="project2" class="project-section section">
                 <div class="content">
-                    <div class="project-showcase">
+                    <div class="project-showcase" data-aos="fade-up">
                         <div class="project-intro">
                             <div class="brand-logo-container">
                                 <img src="img/logos/Asset 13@4x.png" alt="selfmade Logo" class="brand-logo-img">
@@ -331,7 +367,7 @@
 
             <section id="project3" class="project-section section">
                 <div class="content">
-                    <div class="project-showcase">
+                    <div class="project-showcase" data-aos="fade-up">
                         <div class="project-intro">
                             <div class="brand-logo-container">
                                 <img src="img/logos/ROOMSTORY LOGO.png" alt="roomstory Logo" class="brand-logo-img">
@@ -384,7 +420,7 @@
 
             <section id="project4" class="project-section section">
                 <div class="content">
-                    <div class="project-showcase">
+                    <div class="project-showcase" data-aos="fade-up">
                         <div class="project-intro">
                             <div class="brand-logo-container">
                                 <img src="img/logos/Logo in green.png" alt="Katalyst Logo" class="brand-logo-img">
@@ -399,6 +435,16 @@
                         
                         <div class="project-details">
                             <div class="video-grid">
+                                <div class="video-container" data-video="img/Katalyst/7chakrasvid.mp4" data-title="Chakra">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Katalyst/7chakrasvid.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="video-container" data-video="img/Katalyst/luckprosperityAD 2.mp4" data-title="Luck">
                                     <video class="preview-video" muted loop playsinline>
                                         <source src="img/Katalyst/luckprosperityAD 2.mp4" type="video/mp4">
@@ -437,7 +483,7 @@
 
             <section id="project5" class="project-section section">
                 <div class="content">
-                    <div class="project-showcase">
+                    <div class="project-showcase" data-aos="fade-up">
                         <div class="project-intro">
                             <div class="brand-logo-container">
                                 <img src="img/logos/coral_haze_logo.jpeg" alt="Coral Logo" class="brand-logo-img">
@@ -501,8 +547,8 @@
 
         <section id="testimonials" class="section">
             <div class="content">
-                <h2 class="section-title">Testimonials</h2>
-                <div class="testimonials-container">
+                <h2 class="section-title" data-aos="fade-up">Testimonials</h2>
+                <div class="testimonials-container" data-aos="fade-up" data-aos-delay="200">
                     <div class="testimonials-slider">
                         <div class="testimonial-slide active">
                             <div class="testimonial-content">
@@ -577,8 +623,8 @@
 
         <section id="contact" class="section">
             <div class="content">
-                <h2 class="section-title">Contact Me</h2>
-                <div class="contact-container">
+                <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
+                <div class="contact-container" data-aos="fade-up" data-aos-delay="200">
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
@@ -586,15 +632,15 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <p>+91 7042327994</p>
+                            <p>+91 704895462</p>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>Gurugram, Haryana</p>
+                            <p>Guru, India</p>
                         </div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/utkarsh-chawla-04595a280" class="social-link" target="_blank">
+                            <a href="https://www.linkedin.com/in/" class="social-link" target="_blank">
                                 <i class="fab fa-linkedin"></i>
                             </a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -606,7 +652,7 @@
                             <i class="fas fa-envelope-open-text message-icon"></i>
                             <h3>For Work Contact</h3>
                             <p>For any work-related queries, please email me at:</p>
-                            <a href="mailto:utkarshchawla556@gmail.com" class="contact-email">utkarshchawlaa556@gmail.com</a>
+                            <a href="mailto:utkarshchawla556@gmail.com">utkarshchawlaa556@gmail.com</a>
                         </div>
                     </div>
                 </div>
@@ -633,6 +679,9 @@
         </div>
     </div>    
     
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
