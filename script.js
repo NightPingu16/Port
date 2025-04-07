@@ -1,13 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize AOS (Animate On Scroll)
+  AOS.init({
+    duration: 800,
+    easing: "ease",
+    once: true,
+    offset: 100,
+  })
+
+  // Loading screen
+  const loadingScreen = document.querySelector(".loading-screen")
+
+  setTimeout(() => {
+    loadingScreen.classList.add("hidden")
+    setTimeout(() => {
+      loadingScreen.style.display = "none"
+    }, 500)
+  }, 2000)
+
+  // Custom cursor
+  const cursorDot = document.querySelector(".cursor-dot")
+  const cursorOutline = document.querySelector(".cursor-outline")
+
+  window.addEventListener("mousemove", (e) => {
+    const posX = e.clientX
+    const posY = e.clientY
+
+    cursorDot.style.left = `${posX}px`
+    cursorDot.style.top = `${posY}px`
+
+    // Add a slight delay to the cursor outline for a trailing effect
+    setTimeout(() => {
+      cursorOutline.style.left = `${posX}px`
+      cursorOutline.style.top = `${posY}px`
+    }, 50)
+  })
+
+  // Make cursor bigger on clickable elements
+  const clickables = document.querySelectorAll("a, button, .video-container, .skill-icon, .social-link, .dot")
+
+  clickables.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(1.5)"
+      cursorOutline.style.borderColor = "var(--primary-color)"
+      cursorDot.style.transform = "translate(-50%, -50%) scale(0.5)"
+    })
+
+    item.addEventListener("mouseleave", () => {
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(1)"
+      cursorOutline.style.borderColor = "var(--primary-color)"
+      cursorDot.style.transform = "translate(-50%, -50%) scale(1)"
+    })
+  })
+
+  // Navigation
   const burger = document.querySelector(".burger")
   const nav = document.querySelector(".nav-links")
   const navLinks = document.querySelectorAll(".nav-links li")
 
   burger.addEventListener("click", () => {
-    // Toggle nav
+    // Toggle Nav
     nav.classList.toggle("nav-active")
 
-    // Animate links
+    // Animate Links
     navLinks.forEach((link, index) => {
       if (link.style.animation) {
         link.style.animation = ""
@@ -16,417 +70,391 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
 
-    // Burger animation
+    // Burger Animation
     burger.classList.toggle("toggle")
   })
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault()
-
-      // Close mobile menu if open
+  // Close mobile menu when clicking a link
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
       if (nav.classList.contains("nav-active")) {
         nav.classList.remove("nav-active")
         burger.classList.remove("toggle")
+
         navLinks.forEach((link) => {
           link.style.animation = ""
         })
       }
-
-      const targetId = this.getAttribute("href")
-      const targetSection = document.querySelector(targetId)
-
-      window.scrollTo({
-        top: targetSection.offsetTop,
-        behavior: "smooth",
-      })
-
-      // Update active link
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.classList.remove("active")
-      })
-      this.classList.add("active")
     })
   })
 
-  // Track scroll direction
-  let lastScrollTop = 0
-
-  window.addEventListener("scroll", () => {
-    const st = window.pageYOffset || document.documentElement.scrollTop
-    const scrollingDown = st > lastScrollTop
-
-    // Update scroll direction class on body
-    if (scrollingDown) {
-      document.body.classList.remove("scrolling-up")
-      document.body.classList.add("scrolling-down")
-    } else {
-      document.body.classList.remove("scrolling-down")
-      document.body.classList.add("scrolling-up")
-    }
-
-    lastScrollTop = st <= 0 ? 0 : st // For Mobile or negative scrolling
-  })
-
-  // Intersection Observer for section animations
-  const sections = document.querySelectorAll(".section")
+  // Active nav link on scroll
+  const sections = document.querySelectorAll("section")
   const navItems = document.querySelectorAll(".nav-links a")
 
-  const observerOptions = {
-    root: null,
-    rootMargin: "-100px",
-    threshold: 0.1,
-  }
+  window.addEventListener("scroll", () => {
+    let current = ""
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      // Add animation to section content when it comes into view
-      if (entry.isIntersecting) {
-        const content = entry.target.querySelector(".content")
-        content.classList.add("show")
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop
+      const sectionHeight = section.clientHeight
 
-        // Update active navigation link
-        const id = entry.target.getAttribute("id")
-        navItems.forEach((item) => {
-          item.classList.remove("active")
-          if (item.getAttribute("href") === `#${id}`) {
-            item.classList.add("active")
-          }
-        })
-
-        // If it's a project section, add the in-view class
-        if (entry.target.classList.contains("project-section")) {
-          entry.target.classList.add("in-view")
-
-          // Auto-play videos when in view
-          const videos = entry.target.querySelectorAll("video")
-          videos.forEach((video) => {
-            // Only try to play videos on desktop
-            if (window.innerWidth > 768) {
-              if (video.paused) {
-                video.play().catch((e) => console.log("Auto-play prevented:", e))
-              }
-            }
-          })
-        }
-
-        // Special animation for education cards
-        if (id === "education") {
-          const educationCards = entry.target.querySelectorAll(".education-card")
-          educationCards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.add("animate")
-            }, index * 200) // Stagger the animations
-          })
-        }
-      } else {
-        // Remove animation classes when section is out of view
-        if (!entry.target.classList.contains("keep-animation")) {
-          entry.target.querySelector(".content").classList.remove("show")
-
-          // If it's the education section, remove animation classes
-          if (entry.target.id === "education") {
-            const educationCards = entry.target.querySelectorAll(".education-card")
-            educationCards.forEach((card) => {
-              card.classList.remove("animate")
-            })
-          }
-        }
-
-        // Pause videos when out of view
-        if (entry.target.classList.contains("project-section")) {
-          const videos = entry.target.querySelectorAll("video")
-          videos.forEach((video) => {
-            if (!video.paused) {
-              video.pause()
-            }
-          })
-        }
+      if (pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute("id")
       }
     })
-  }, observerOptions)
 
-  sections.forEach((section) => {
-    observer.observe(section)
+    navItems.forEach((item) => {
+      item.classList.remove("active")
+      if (item.getAttribute("href").substring(1) === current) {
+        item.classList.add("active")
+      }
+    })
   })
 
-  // Initialize the first section to be visible
-  document.querySelector("#home .content").classList.add("show")
+  // Scroll indicator
+  const scrollIndicator = document.createElement("div")
+  scrollIndicator.className = "scroll-indicator"
+  document.body.appendChild(scrollIndicator)
 
-  // Video modal functionality
+  window.addEventListener("scroll", () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+    const scrolled = (winScroll / height) * 100
+
+    scrollIndicator.style.width = scrolled + "%"
+  })
+
+  // Parallax effect
+  const parallaxElements = document.querySelectorAll(".about-img, .skill-category, .education-card, .timeline-content")
+
+  window.addEventListener("scroll", () => {
+    parallaxElements.forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top
+      const elementHeight = element.offsetHeight
+      const windowHeight = window.innerHeight
+
+      if (elementTop < windowHeight && elementTop > -elementHeight) {
+        const scrolled = (windowHeight - elementTop) / (windowHeight + elementHeight)
+        const translateY = scrolled * 30 // Adjust this value for more/less movement
+
+        element.style.transform = `translateY(${translateY}px)`
+      }
+    })
+  })
+
+  // Typewriter effect
+  const typewriterText = document.querySelector(".typewriter-text")
+  const roles = ["Video Editor", "Motion Designer", "Animator", "3D Artist"]
+  let roleIndex = 0
+  let charIndex = 0
+  let isDeleting = false
+  let typingSpeed = 100
+
+  function type() {
+    const currentRole = roles[roleIndex]
+
+    if (isDeleting) {
+      // Deleting text
+      typewriterText.textContent = currentRole.substring(0, charIndex - 1)
+      charIndex--
+      typingSpeed = 50 // Faster when deleting
+    } else {
+      // Typing text
+      typewriterText.textContent = currentRole.substring(0, charIndex + 1)
+      charIndex++
+      typingSpeed = 100 // Normal speed when typing
+    }
+
+    // If finished typing the current role
+    if (!isDeleting && charIndex === currentRole.length) {
+      isDeleting = false
+      typingSpeed = 1500 // Pause at the end of typing
+      setTimeout(() => {
+        isDeleting = true
+      }, typingSpeed)
+    }
+    // If finished deleting the current role
+    else if (isDeleting && charIndex === 0) {
+      isDeleting = false
+      roleIndex = (roleIndex + 1) % roles.length // Move to next role
+      typingSpeed = 500 // Pause before typing next role
+    }
+
+    setTimeout(type, typingSpeed)
+  }
+
+  // Start the typewriter effect
+  setTimeout(type, 1000)
+
+  // Video preview hover effect
+  const previewVideos = document.querySelectorAll(".preview-video")
+
+  previewVideos.forEach((video) => {
+    const videoContainer = video.parentElement
+
+    videoContainer.addEventListener("mouseenter", () => {
+      video.play()
+    })
+
+    videoContainer.addEventListener("mouseleave", () => {
+      video.pause()
+    })
+  })
+
+  // Video modal
+  const videoContainers = document.querySelectorAll(".video-container")
   const videoModal = document.getElementById("video-modal")
   const projectVideo = document.getElementById("project-video")
   const videoTitle = document.getElementById("video-title")
   const closeModal = document.querySelector(".close-modal")
-  const videoContainers = document.querySelectorAll(".video-container")
 
-  // Open modal when video is clicked
   videoContainers.forEach((container) => {
     container.addEventListener("click", () => {
       const videoSrc = container.getAttribute("data-video")
       const title = container.getAttribute("data-title")
 
-      if (videoModal && projectVideo && videoTitle) {
-        projectVideo.innerHTML = `<source src="${videoSrc}" type="video/mp4">`
-        videoTitle.textContent = title
-        videoModal.style.display = "flex"
+      projectVideo.src = videoSrc
+      videoTitle.textContent = title
 
-        setTimeout(() => {
-          videoModal.classList.add("show")
-          projectVideo.load()
+      videoModal.style.display = "flex"
+      projectVideo.load()
+      projectVideo.play()
 
-          // Add controls to the video
-          projectVideo.setAttribute("controls", "true")
-
-          // Play video after a short delay to avoid stuttering
-          setTimeout(() => {
-            projectVideo.play().catch((e) => console.log("Autoplay prevented:", e))
-          }, 300)
-        }, 10)
-      }
+      // Disable cursor when modal is open
+      document.body.style.cursor = "auto"
+      cursorDot.style.display = "none"
+      cursorOutline.style.display = "none"
     })
   })
 
-  // Close modal when X is clicked
-  if (closeModal) {
-    closeModal.addEventListener("click", () => {
-      closeVideoModal()
-    })
-  }
+  closeModal.addEventListener("click", () => {
+    videoModal.style.display = "none"
+    projectVideo.pause()
 
-  // Close modal when clicking outside the video
-  if (videoModal) {
-    videoModal.addEventListener("click", (e) => {
-      if (e.target === videoModal) {
-        closeVideoModal()
-      }
-    })
-  }
+    // Re-enable cursor when modal is closed
+    document.body.style.cursor = "none"
+    cursorDot.style.display = "block"
+    cursorOutline.style.display = "block"
+  })
 
-  // Function to close the video modal
-  function closeVideoModal() {
-    if (videoModal) {
-      videoModal.classList.remove("show")
-      setTimeout(() => {
-        videoModal.style.display = "none"
-        if (projectVideo) {
-          projectVideo.pause()
-          projectVideo.innerHTML = ""
-        }
-      }, 300)
-    }
-  }
+  // Close modal when clicking outside
+  videoModal.addEventListener("click", (e) => {
+    if (e.target === videoModal) {
+      videoModal.style.display = "none"
+      projectVideo.pause()
 
-  // Keyboard events for modal
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && videoModal && videoModal.classList.contains("show")) {
-      closeVideoModal()
+      // Re-enable cursor when modal is closed
+      document.body.style.cursor = "none"
+      cursorDot.style.display = "block"
+      cursorOutline.style.display = "block"
     }
   })
 
-  // Testimonials slider functionality
+  // Testimonial slider
   const testimonialSlides = document.querySelectorAll(".testimonial-slide")
-  const testimonialDots = document.querySelectorAll(".dot")
-  const prevButton = document.querySelector(".testimonial-prev")
-  const nextButton = document.querySelector(".testimonial-next")
+  const dots = document.querySelectorAll(".dot")
+  const prevBtn = document.querySelector(".testimonial-prev")
+  const nextBtn = document.querySelector(".testimonial-next")
   let currentSlide = 0
-  const totalSlides = testimonialSlides.length
 
-  // Function to show a specific slide
-  function showSlide(index) {
-    // Hide all slides
+  function showSlide(n) {
     testimonialSlides.forEach((slide) => {
       slide.classList.remove("active")
     })
 
-    // Deactivate all dots
-    testimonialDots.forEach((dot) => {
+    dots.forEach((dot) => {
       dot.classList.remove("active")
     })
 
-    // current slide and activate the corresponding dot
-    testimonialSlides[index].classList.add("active")
-    testimonialDots[index].classList.add("active")
-
-    currentSlide = index
+    testimonialSlides[n].classList.add("active")
+    dots[n].classList.add("active")
   }
 
-  // Next slide function
   function nextSlide() {
-    let nextIndex = currentSlide + 1
-    if (nextIndex >= totalSlides) {
-      nextIndex = 0
-    }
-    showSlide(nextIndex)
+    currentSlide = (currentSlide + 1) % testimonialSlides.length
+    showSlide(currentSlide)
   }
 
-  // Previous slide function
   function prevSlide() {
-    let prevIndex = currentSlide - 1
-    if (prevIndex < 0) {
-      prevIndex = totalSlides - 1
-    }
-    showSlide(prevIndex)
+    currentSlide = (currentSlide - 1 + testimonialSlides.length) % testimonialSlides.length
+    showSlide(currentSlide)
   }
 
-  // Event listeners for controls
-  if (nextButton) {
-    nextButton.addEventListener("click", nextSlide)
-  }
+  nextBtn.addEventListener("click", nextSlide)
+  prevBtn.addEventListener("click", prevSlide)
 
-  if (prevButton) {
-    prevButton.addEventListener("click", prevSlide)
-  }
-
-  // Dot navigation
-  testimonialDots.forEach((dot) => {
-    dot.addEventListener("click", function () {
-      const slideIndex = Number.parseInt(this.getAttribute("data-index"))
-      showSlide(slideIndex)
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      currentSlide = index
+      showSlide(currentSlide)
     })
   })
 
-  // Auto-advance slides every 5 seconds
+  // Auto-advance testimonials
   setInterval(nextSlide, 5000)
 
-  // Experience timeline interaction
-  const timelinePoints = document.querySelectorAll(".timeline-point")
-  const timelineCards = document.querySelectorAll(".timeline-card")
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault()
 
-  if (timelinePoints.length > 0 && timelineCards.length > 0) {
-    // Show the first card by default
-    timelineCards[0].classList.add("active")
+      const targetId = this.getAttribute("href")
+      const targetElement = document.querySelector(targetId)
 
-    // Add click event to timeline points
-    timelinePoints.forEach((point, index) => {
-      point.addEventListener("click", () => {
-        // Hide all cards
-        timelineCards.forEach((card) => {
-          card.classList.remove("active")
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: "smooth",
         })
-
-        // Show the selected card
-        if (timelineCards[index]) {
-          timelineCards[index].classList.add("active")
-        }
-      })
+      }
     })
-  }
-
-  // interactive background particles
-  createParticles()
-
-  // 3D tilt effect to education cards
-  const educationCards = document.querySelectorAll(".education-card")
-
-  educationCards.forEach((card) => {
-    card.addEventListener("mousemove", handleTilt)
-    card.addEventListener("mouseleave", resetTilt)
   })
 
-  function handleTilt(e) {
-    // Only apply tilt effect on desktop
-    if (window.innerWidth <= 768) return
+  // Animate skill icons on scroll
+  const skillIcons = document.querySelectorAll(".skill-icon")
 
-    const cardRect = this.getBoundingClientRect()
-    const cardCenterX = cardRect.left + cardRect.width / 2
-    const cardCenterY = cardRect.top + cardRect.height / 2
+  function animateSkillIcons() {
+    skillIcons.forEach((icon) => {
+      const iconTop = icon.getBoundingClientRect().top
+      const windowHeight = window.innerHeight
 
-    const mouseX = e.clientX - cardCenterX
-    const mouseY = e.clientY - cardCenterY
-
-    // Calculate rotation based on mouse position
-    const rotateY = mouseX * 0.05
-    const rotateX = -mouseY * 0.05
-
-    // Transform
-    this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
-    this.style.transition = "transform 0.1s ease"
-
-    // Highlight Effect
-    const glowX = (mouseX / cardRect.width) * 100 + 50
-    const glowY = (mouseY / cardRect.height) * 100 + 50
-    this.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(74, 108, 247, 0.3), rgba(30, 30, 30, 0.8))`
-  }
-
-  function resetTilt() {
-    this.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale(1)"
-    this.style.transition = "transform 0.5s ease, background 0.5s ease"
-    this.style.background = "rgba(30, 30, 30, 0.8)"
-  }
-
-  // Check if device is mobile
-  const isMobile = window.innerWidth <= 768
-
-  // Preload videos for better mobile performance
-  if (isMobile) {
-    const videoElements = document.querySelectorAll("video")
-    videoElements.forEach((video) => {
-      video.setAttribute("preload", "metadata")
-      video.setAttribute("playsinline", "true")
+      if (iconTop < windowHeight - 100) {
+        icon.style.animation = "pulse 2s infinite"
+      } else {
+        icon.style.animation = "none"
+      }
     })
   }
-})
 
-// Interactive Background Particles
-function createParticles() {
-  // Reduce particle count on mobile for better performance
-  const isMobile = window.innerWidth <= 768
-  const particleCount = isMobile ? 20 : 50
+  window.addEventListener("scroll", animateSkillIcons)
 
-  const particlesContainer = document.createElement("div")
-  particlesContainer.className = "particles"
-  document.body.appendChild(particlesContainer)
+  // Animate progress bar on scroll
+  const progressBars = document.querySelectorAll(".progress-fill")
 
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement("div")
-    particle.style.position = "absolute"
-    particle.style.width = Math.random() * 10 + 5 + "px"
-    particle.style.height = particle.style.width
-    particle.style.backgroundColor = "rgba(74, 108, 247, 0.2)"
-    particle.style.borderRadius = "50%"
-    particle.style.top = Math.random() * 100 + "vh"
-    particle.style.left = Math.random() * 100 + "vw"
-    particle.style.opacity = Math.random() * 0.5
-    particle.style.transition = "transform 1s ease, opacity 1s ease"
+  function animateProgressBars() {
+    progressBars.forEach((bar) => {
+      const barTop = bar.getBoundingClientRect().top
+      const windowHeight = window.innerHeight
 
-    particlesContainer.appendChild(particle)
-
-    // Animate Particles - less frequent on mobile
-    setInterval(
-      () => {
-        particle.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`
-        particle.style.opacity = Math.random() * 0.5
-      },
-      isMobile ? 3000 : 2000,
-    )
+      if (barTop < windowHeight - 100) {
+        const width = bar.getAttribute("style").match(/width: (\d+)%/)[1]
+        bar.style.width = "0%"
+        setTimeout(() => {
+          bar.style.width = width + "%"
+        }, 100)
+      }
+    })
   }
 
-  // Mouse Interaction - only on desktop
-  if (!isMobile) {
-    document.addEventListener("mousemove", (e) => {
-      const mouseX = e.clientX
-      const mouseY = e.clientY
+  window.addEventListener("load", animateProgressBars)
 
-      const particles = document.querySelectorAll(".particles div")
-      particles.forEach((particle) => {
-        const rect = particle.getBoundingClientRect()
-        const particleX = rect.left + rect.width / 2
-        const particleY = rect.top + rect.height / 2
+  // Hide cursor when leaving window
+  document.addEventListener("mouseleave", () => {
+    cursorDot.style.opacity = "0"
+    cursorOutline.style.opacity = "0"
+  })
 
-        const distX = mouseX - particleX
-        const distY = mouseY - particleY
-        const distance = Math.sqrt(distX * distX + distY * distY)
+  document.addEventListener("mouseenter", () => {
+    cursorDot.style.opacity = "1"
+    cursorOutline.style.opacity = "1"
+  })
 
-        if (distance < 100) {
-          const moveX = distX / 10
-          const moveY = distY / 10
-          particle.style.transform = `translate(${-moveX}px, ${-moveY}px)`
-          particle.style.opacity = "0.8"
+  // Hide default cursor
+  document.body.style.cursor = "none"
+
+  // Preload videos
+  function preloadVideos() {
+    const videos = document.querySelectorAll("video")
+    videos.forEach((video) => {
+      const source = video.querySelector("source")
+      if (source) {
+        const preloadLink = document.createElement("link")
+        preloadLink.rel = "preload"
+        preloadLink.as = "video"
+        preloadLink.href = source.src
+        document.head.appendChild(preloadLink)
+      }
+    })
+  }
+
+  window.addEventListener("load", preloadVideos)
+
+  // Tilt effect for project cards
+  const projectShowcases = document.querySelectorAll(".project-showcase")
+
+  projectShowcases.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      const centerX = rect.width / 2
+      const centerY = rect.height / 2
+
+      const tiltX = (y - centerY) / 20
+      const tiltY = (centerX - x) / 20
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px)`
+    })
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)"
+    })
+  })
+
+  // Scroll to top button
+  const scrollTopBtn = document.createElement("button")
+  scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>'
+  scrollTopBtn.className = "scroll-top-btn"
+  scrollTopBtn.style.position = "fixed"
+  scrollTopBtn.style.bottom = "20px"
+  scrollTopBtn.style.right = "20px"
+  scrollTopBtn.style.width = "50px"
+  scrollTopBtn.style.height = "50px"
+  scrollTopBtn.style.borderRadius = "50%"
+  scrollTopBtn.style.backgroundColor = "var(--primary-color)"
+  scrollTopBtn.style.color = "white"
+  scrollTopBtn.style.border = "none"
+  scrollTopBtn.style.fontSize = "1.2rem"
+  scrollTopBtn.style.cursor = "pointer"
+  scrollTopBtn.style.display = "none"
+  scrollTopBtn.style.zIndex = "999"
+  scrollTopBtn.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.2)"
+  scrollTopBtn.style.transition = "all 0.3s ease"
+
+  document.body.appendChild(scrollTopBtn)
+
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.style.display = "block"
+      scrollTopBtn.style.opacity = "1"
+    } else {
+      scrollTopBtn.style.opacity = "0"
+      setTimeout(() => {
+        if (window.pageYOffset <= 300) {
+          scrollTopBtn.style.display = "none"
         }
-      })
+      }, 300)
+    }
+  })
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     })
-  }
-}
+  })
+
+  // Hover effect for scroll top button
+  scrollTopBtn.addEventListener("mouseenter", () => {
+    scrollTopBtn.style.transform = "translateY(-5px)"
+    scrollTopBtn.style.backgroundColor = "var(--primary-dark)"
+  })
+
+  scrollTopBtn.addEventListener("mouseleave", () => {
+    scrollTopBtn.style.transform = "translateY(0)"
+    scrollTopBtn.style.backgroundColor = "var(--primary-color)"
+  })
+})
 
