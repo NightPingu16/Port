@@ -17,41 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500)
   }, 2000)
 
-  // Custom cursor
-  const cursorDot = document.querySelector(".cursor-dot")
-  const cursorOutline = document.querySelector(".cursor-outline")
-
-  window.addEventListener("mousemove", (e) => {
-    const posX = e.clientX
-    const posY = e.clientY
-
-    cursorDot.style.left = `${posX}px`
-    cursorDot.style.top = `${posY}px`
-
-    // Add a slight delay to the cursor outline for a trailing effect
-    setTimeout(() => {
-      cursorOutline.style.left = `${posX}px`
-      cursorOutline.style.top = `${posY}px`
-    }, 50)
-  })
-
-  // Make cursor bigger on clickable elements
-  const clickables = document.querySelectorAll("a, button, .video-container, .skill-icon, .social-link, .dot")
-
-  clickables.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-      cursorOutline.style.transform = "translate(-50%, -50%) scale(1.5)"
-      cursorOutline.style.borderColor = "var(--primary-color)"
-      cursorDot.style.transform = "translate(-50%, -50%) scale(0.5)"
-    })
-
-    item.addEventListener("mouseleave", () => {
-      cursorOutline.style.transform = "translate(-50%, -50%) scale(1)"
-      cursorOutline.style.borderColor = "var(--primary-color)"
-      cursorDot.style.transform = "translate(-50%, -50%) scale(1)"
-    })
-  })
-
   // Navigation
   const burger = document.querySelector(".burger")
   const nav = document.querySelector(".nav-links")
@@ -220,22 +185,12 @@ document.addEventListener("DOMContentLoaded", () => {
       videoModal.style.display = "flex"
       projectVideo.load()
       projectVideo.play()
-
-      // Disable cursor when modal is open
-      document.body.style.cursor = "auto"
-      cursorDot.style.display = "none"
-      cursorOutline.style.display = "none"
     })
   })
 
   closeModal.addEventListener("click", () => {
     videoModal.style.display = "none"
     projectVideo.pause()
-
-    // Re-enable cursor when modal is closed
-    document.body.style.cursor = "none"
-    cursorDot.style.display = "block"
-    cursorOutline.style.display = "block"
   })
 
   // Close modal when clicking outside
@@ -243,11 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === videoModal) {
       videoModal.style.display = "none"
       projectVideo.pause()
-
-      // Re-enable cursor when modal is closed
-      document.body.style.cursor = "none"
-      cursorDot.style.display = "block"
-      cursorOutline.style.display = "block"
     }
   })
 
@@ -349,53 +299,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("load", animateProgressBars)
 
-  // Hide cursor when leaving window
-  document.addEventListener("mouseleave", () => {
-    cursorDot.style.opacity = "0"
-    cursorOutline.style.opacity = "0"
-  })
-
-  document.addEventListener("mouseenter", () => {
-    cursorDot.style.opacity = "1"
-    cursorOutline.style.opacity = "1"
-  })
-
-  // Hide default cursor
-  document.body.style.cursor = "none"
-
-  // Preload videos
-  function preloadVideos() {
-    const videos = document.querySelectorAll("video")
-    videos.forEach((video) => {
-      const source = video.querySelector("source")
-      if (source) {
-        const preloadLink = document.createElement("link")
-        preloadLink.rel = "preload"
-        preloadLink.as = "video"
-        preloadLink.href = source.src
-        document.head.appendChild(preloadLink)
-      }
-    })
-  }
-
-  window.addEventListener("load", preloadVideos)
-
-  // Tilt effect for project cards
+  // Tilt effect for project cards - Modified to disable on mobile
   const projectShowcases = document.querySelectorAll(".project-showcase")
+  
+  // Function to check if device is mobile
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
 
   projectShowcases.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
+      // Only apply tilt effect if not on mobile
+      if (!isMobile()) {
+        const rect = card.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
 
-      const centerX = rect.width / 2
-      const centerY = rect.height / 2
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
 
-      const tiltX = (y - centerY) / 20
-      const tiltY = (centerX - x) / 20
+        const tiltX = (y - centerY) / 20
+        const tiltY = (centerX - x) / 20
 
-      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px)`
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-10px)`
+      }
     })
 
     card.addEventListener("mouseleave", () => {
@@ -457,4 +384,3 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTopBtn.style.backgroundColor = "var(--primary-color)"
   })
 })
-
