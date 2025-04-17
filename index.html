@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UC - Video Editor & Motion Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body class="dark-theme">
+
+    <div class="loading-screen">
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <circle id="loader-circle" cx="40" cy="40" r="32"></circle>
+            </svg>
+            <div class="loading-text">UC</div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">UC</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#work-experience">Work Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="section">
+            <div class="content">
+                <div class="home-bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+                <h1 data-aos="fade-up" data-aos-delay="300">Hello, I'm <span class="highlight">Utkarsh Chawla</span></h1>
+                <h2 data-aos="fade-up" data-aos-delay="500"><span class="typewriter-container"><span class="typewriter-text"></span></span></h2>
+                <a href="#about" class="scroll-btn" data-aos="fade-up" data-aos-delay="700">
+                    <span>Scroll Down</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">About Me</h2>
+                <div class="about-content" data-aos="fade-up" data-aos-delay="200">
+                    <div class="about-img">
+                        <img src="img/uc.jpg" alt="Profile Image" class="profile-image">
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="about-text">
+                        <p style="font-size: 1.2rem; line-height: 1.8;">Hey there! I'm Utkarsh Chawla, a creative video editor and designer with a knack for storytelling. I specialize in crafting high-impact visuals that engage and inspire, using tools like After Effects, Premiere Pro, and Photoshop. Whether it's for brands or creators, I turn ideas into compelling content that stands out.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Skills</h2>
+                <div class="skills-interactive">
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon">
+                            <img src="img/logos/premiere-pro.png" alt="Adobe Premiere Pro" class="software-logo">
+                        </div>
+                        <span class="skill-name">Adobe Premiere Pro</span>
+                    </div>
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon">
+                            <img src="img/logos/after-effects.png" alt="Adobe After Effects" class="software-logo">
+                        </div>
+                        <span class="skill-name">Adobe After Effects</span>
+                    </div>
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="skill-icon">
+                            <img src="img/logos/davinci.png" alt="DaVinci Resolve" class="software-logo">
+                        </div>
+                        <span class="skill-name">DaVinci Resolve</span>
+                    </div>
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="skill-icon">
+                            <img src="img/logos/photoshop.png" alt="Adobe Photoshop" class="software-logo">
+                        </div>
+                        <span class="skill-name">Adobe Photoshop</span>
+                    </div>
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="skill-icon">
+                            <img src="img/logos/illustrator.png" alt="Adobe Illustrator" class="software-logo">
+                        </div>
+                        <span class="skill-name">Adobe Illustrator</span>
+                    </div>
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="600">
+                        <div class="skill-icon">
+                            <img src="img/logos/adobe-audition.png" alt="Adobe Audition" class="software-logo">
+                        </div>
+                        <span class="skill-name">Adobe Audition</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Education</h2>
+                <div class="education-cards" data-aos="fade-up" data-aos-delay="200">
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-details">
+                            <h3>B.Sc in Animation</h3>
+                            <h4>Asian Academy of Film And Television</h4>
+                            <div class="education-date">2022 - Present</div>
+                            <p>Currently pursuing, Specializing in Video Editing and Motion Designing. Participated in various video editing comps.</p>
+                        </div>
+                        <div class="education-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                            <span>90% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Experience</h2>
+                <div class="experience-timeline">
+                    <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024 - Present</div>
+                            <h3>Video Editor/Motion Designer</h3>
+                            <h4>Wolfpack Labs</h4>
+                            <ul class="timeline-achievements">
+                                <li>Worked as a Video Editor and Motion Designer, creating dynamic reels and promotional videos</li>
+                                <li>Developed motion graphics to enhance brand marketing and engagement</li>
+                                <li>Collaborated with the creative team to produce high-quality visuals for social media and digital platforms</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018 - 2020</div>
+                            <h3>Video Editing Intern</h3>
+                            <h4>Sploot</h4>
+                            <ul class="timeline-achievements">
+                                <li>Created engaging video content, including reels and promotional clips, during a video editing internship</li>
+                                <li>Collaborated with the team to enhance visual storytelling and brand presence</li>
+                                <li>Edited and optimized videos for social media and marketing campaigns</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work-experience" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
+                <div class="about-content" data-aos="fade-up" data-aos-delay="200">
+                    <div class="about-text">
+                        <p style="font-size: 1.2rem; line-height: 1.8;">Over the course of my career, I've worked with various brands, bringing their ideas to life through engaging and compelling content. From eye-catching ads to dynamic social media videos, I've helped businesses connect with their audience in a way that feels fresh, impactful, and unforgettable.</p>
+                    </div>
+                    <div class="about-img">
+                        <img src="img/uc2.jpg" alt="Work Experience Image" class="profile-image">
+                        <div class="img-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="projects">
+            <section id="project1" class="project-section section">
+                <div class="content">
+                    <h2 class="section-title" data-aos="fade-up">Projects</h2>
+                    <div class="project-showcase" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-intro">
+                            <div class="brand-logo-container">
+                                <img src="img/logos/Logomark_Blue_1.png" alt="FES Logo" class="brand-logo-img">
+                            </div>
+                            <h3 class="brand-name">FES CAFE AND DESSERTS</h3>
+                        </div>
+                        
+                        <div class="project-overview">
+                            <h4>Project Overview</h4>
+                            <p>Created a series of promotional videos for FES Cafe and Desserts, showcasing their signature menu items and special events. The videos were designed to capture the essence of their brand and appeal to their target audience on social media platforms.</p>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="video-grid">
+                                <div class="video-container" data-video="img/FES/fes1.mp4" data-title="DESSERTS">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/FES/fes1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/FES/fes2.mp4" data-title="BAGEL">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/FES/fes2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/FES/fes3.mp4" data-title="RAVE">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/FES/fes3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project2" class="project-section section">
+                <div class="content">
+                    <div class="project-showcase" data-aos="fade-up">
+                        <div class="project-intro">
+                            <div class="brand-logo-container">
+                                <img src="img/logos/Asset 13@4x.png" alt="selfmade Logo" class="brand-logo-img">
+                            </div>
+                            <h3 class="brand-name">SELFMADE</h3>
+                        </div>
+                        
+                        <div class="project-overview">
+                            <h4>Project Overview</h4>
+                            <p>Developed a series of brand videos for Selfmade, highlighting their unique products and brand story. These videos were designed to increase brand awareness and engagement across multiple digital platforms.</p>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="video-grid">
+                                <div class="video-container" data-video="img/Selfmade/sm1.mp4" data-title="Bellavita">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Selfmade/sm1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Selfmade/sm2.mp4" data-title="Starbucks">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Selfmade/sm2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Selfmade/sm3.mp4" data-title="Comet">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Selfmade/sm3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Selfmade/sm4.mp4" data-title="TAILOR">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Selfmade/sm4.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project3" class="project-section section">
+                <div class="content">
+                    <div class="project-showcase" data-aos="fade-up">
+                        <div class="project-intro">
+                            <div class="brand-logo-container">
+                                <img src="img/logos/ROOMSTORY LOGO.png" alt="roomstory Logo" class="brand-logo-img">
+                            </div>
+                            <h3 class="brand-name">ROOMSTORY</h3>
+                        </div>
+                        
+                        <div class="project-overview">
+                            <h4>Project Overview</h4>
+                            <p>Created interior design visualization videos for Roomstory, showcasing their design concepts and finished projects. These videos helped clients visualize potential designs and highlighted the company's expertise in interior design.</p>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="video-grid">
+                                <div class="video-container" data-video="img/Roomstory/rs1.mp4" data-title="3d Design">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Roomstory/rs1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Roomstory/rs2.mp4" data-title="Interior Design">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Roomstory/rs2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Roomstory/rs3.mp4" data-title="Kidsroom">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Roomstory/rs3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project4" class="project-section section">
+                <div class="content">
+                    <div class="project-showcase" data-aos="fade-up">
+                        <div class="project-intro">
+                            <div class="brand-logo-container">
+                                <img src="img/logos/Logo in green.png" alt="Katalyst Logo" class="brand-logo-img">
+                            </div>
+                            <h3 class="brand-name">KATALYST</h3>
+                        </div>
+                        
+                        <div class="project-overview">
+                            <h4>Project Overview</h4>
+                            <p>Produced a series of spiritual and wellness-focused videos for Katalyst, helping them connect with their audience through engaging visual storytelling. These videos were designed to educate and inspire viewers about various spiritual concepts.</p>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="video-grid">
+                                <div class="video-container" data-video="img/Katalyst/k1.mp4" data-title="Chakra">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Katalyst/k1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Katalyst/k2.mp4" data-title="Luck">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Katalyst/k2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Katalyst/k3.mp4" data-title="Manifest">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Katalyst/k3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/Katalyst/k4.mp4" data-title="Pyrite">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/Katalyst/k4.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project5" class="project-section section">
+                <div class="content">
+                    <div class="project-showcase" data-aos="fade-up">
+                        <div class="project-intro">
+                            <div class="brand-logo-container">
+                                <img src="img/logos/coral_haze_logo.jpeg" alt="Coral Logo" class="brand-logo-img">
+                            </div>
+                            <h3 class="brand-name">CORAL HAZE</h3>
+                        </div>
+                        
+                        <div class="project-overview">
+                            <h4>Project Overview</h4>
+                            <p>Developed fashion and lifestyle videos for Coral Haze, showcasing their footwear collection and brand identity. These videos were designed to appeal to their target demographic and increase engagement on social media platforms.</p>
+                        </div>
+                        
+                        <div class="project-details">
+                            <div class="video-grid">
+                                <div class="video-container" data-video="img/CoralHaze/ch1.mp4" data-title="CoralHaze1">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/CoralHaze/ch1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/CoralHaze/ch2.mp4" data-title="CoralHaze2">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/CoralHaze/ch2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="video-container" data-video="img/CoralHaze/ch3.mp4" data-title="CoralHaze3">
+                                    <video class="preview-video" muted loop playsinline>
+                                        <source src="img/CoralHaze/ch3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="video-overlay">
+                                        <div class="play-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="testimonials" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Testimonials</h2>
+                <div class="testimonials-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonials-slider">
+                        <div class="testimonial-slide active">
+                            <div class="testimonial-content">
+                                <div class="testimonial-text">
+                                    <i class="fas fa-quote-left quote-icon"></i>
+                                    <p>Utkarsh's video editing skills transformed our project campaign. The attention to detail and creative transitions made our content stand out in a crowded market. Highly recommended for anyone looking for professional video editing services.</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Joel</h4>
+                                        <p>Aspiring Engineer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <div class="testimonial-text">
+                                    <i class="fas fa-quote-left quote-icon"></i>
+                                    <p>Working with Utkarsh was a game-changer for our YouTube channel. The quality of editing and motion graphics elevated our content to a professional level.</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Nikhil</h4>
+                                        <p>Content Creator</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <div class="testimonial-text">
+                                    <i class="fas fa-quote-left quote-icon"></i>
+                                    <p>Utkarsh delivered our corporate training videos with exceptional quality and ahead of schedule. The clean editing style and professional transitions made complex information easy to understand for our team members.</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Shivank</h4>
+                                        <p>Backend Intern</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <div class="testimonial-text">
+                                    <i class="fas fa-quote-left quote-icon"></i>
+                                    <p>The motion graphics and visual effects Utkarsh created for our product launch video were absolutely stunning. The attention to brand guidelines while still bringing creative flair made for a perfect collaboration.</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Kunal</h4>
+                                        <p>Interior Designer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-controls">
+                        <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="testimonial-dots">
+                            <span class="dot active" data-index="0"></span>
+                            <span class="dot" data-index="1"></span>
+                            <span class="dot" data-index="2"></span>
+                            <span class="dot" data-index="3"></span>
+                        </div>
+                        <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="content">
+                <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
+                <div class="contact-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:utkarshchawla556@gmail.com" class="contact-email">utkarshchawlaa556@gmail.com</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p>+91 7042327994</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Gurugram, India</p>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/utkarsh-chawla-04595a280" class="social-link" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-message">
+                        <div class="contact-message-content">
+                            <i class="fas fa-envelope-open-text message-icon"></i>
+                            <h3>For Work Contact</h3>
+                            <p>For any work-related queries, please email me at:</p>
+                            <a href="mailto:utkarshchawla556@gmail.com" class="contact-email">utkarshchawlaa556@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Utkarsh. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="video-modal" class="video-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <video id="project-video" controls>
+                    <source src="/placeholder.svg" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <h3 id="video-title" class="video-title"></h3>
+        </div>
+    </div>    
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
